@@ -1,2 +1,3 @@
-# Designer-Patterns-DotNet
-Padrões de projeto, usando Patterns usando .Net Core.
+# Decorator Pattern - Using ASP.NET DI and Scruptor
+
+Decorator demo
