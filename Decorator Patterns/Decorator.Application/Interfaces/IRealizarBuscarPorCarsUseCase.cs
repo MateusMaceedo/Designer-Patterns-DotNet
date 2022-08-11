@@ -1,10 +1,9 @@
-﻿using Decorator.Models;
-using System.Threading.Tasks;
+﻿using Decorator.Application.Models.V2;
 
 namespace Decorator.Application.Interfaces
 {
     public interface IRealizarBuscarPorCarsUseCase
     {
-        CarDto RealizarBuscarPorCars();
+        CarDtoV2 ListV2();
     }
 }

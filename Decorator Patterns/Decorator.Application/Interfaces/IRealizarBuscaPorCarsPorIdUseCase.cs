@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Decorator.Application.Models.V2;
+using System;
 
 namespace Decorator.Application.Interfaces
 {
     public interface IRealizarBuscaPorCarsPorIdUseCase
     {
-
+        CarDtoV2 GetV2(int id);
     }
 }

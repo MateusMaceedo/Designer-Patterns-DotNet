@@ -1,6 +1,6 @@
 ﻿namespace Decorator.Models
 {
-    public class Car
+    public class CarV1
     {
         public int Id { get; set; }
         public string Model { get; set; }

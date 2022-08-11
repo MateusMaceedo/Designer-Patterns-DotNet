@@ -7,6 +7,6 @@ namespace Decorator.Infra.RedisDataRepository.Interface
         string GetStringValue(string key);
         void SetStringValue(string key, string value, int timeOutHours);
         void DeleteStringValue(string key);
-        CarDto GetType(object type);
+        CarDtoV1 GetType(object type);
     }
 }

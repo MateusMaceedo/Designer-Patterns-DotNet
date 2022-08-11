@@ -1,8 +1,8 @@
-﻿using Decorator.Models;
+﻿using Decorator.Application.Models.V2;
+using Decorator.Models;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Threading.Tasks;
 
 namespace Decorator.Stores.Caching
 {
@@ -21,14 +21,14 @@ namespace Decorator.Stores.Caching
             _inner = inner;
             _logger = logger;
         }
-        public CarDto List()
+        public CarDtoV1 ListV1()
         {
             // Se caso não tiver na memoria vai no banco
             var key = "Cars";
-            var items = _memoryCache.Get<CarDto>(key);
+            var items = _memoryCache.Get<CarDtoV1>(key);
             if (items == null)
             {
-                items = _inner.List();
+                items = _inner.ListV1();
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {
@@ -45,13 +45,13 @@ namespace Decorator.Stores.Caching
             return items;
         }
 
-        public CarDto Get(int id)
+        public CarDtoV1 GetV1(int id)
         {
             var key = $"Cars:{id}";
-            var items = _memoryCache.Get<CarDto>(key);
+            var items = _memoryCache.Get<CarDtoV1>(key);
             if (items == null)
             {
-                items = _inner.Get(id);
+                items = _inner.GetV1(id);
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {
@@ -68,9 +68,51 @@ namespace Decorator.Stores.Caching
             return items;
         }
 
-        public Task GetHashCode(int id)
+        public CarDtoV2 ListV2()
         {
-            throw new NotImplementedException();
+            // Se caso não tiver na memoria vai no banco
+            var key = "Cars";
+            var items = _memoryCache.Get<CarDtoV2>(key);
+            if (items == null)
+            {
+                items = _inner.ListV2();
+                _logger.LogTrace("Cache miss for {CacheKey}", key);
+                if (items != null)
+                {
+                    _logger.LogTrace("Setting items in cache for {CacheKey}", key);
+                    _memoryCache.Set(key, items, TimeSpan.FromMinutes(1));
+                }
+            }
+            else
+            {
+                items.FromMemory();
+                _logger.LogTrace("Cache hit for {CacheKey}", key);
+            }
+
+            return items;
+        }
+
+        public CarDtoV2 GetV2(int id)
+        {
+            var key = $"Cars:{id}";
+            var items = _memoryCache.Get<CarDtoV2>(key);
+            if (items == null)
+            {
+                items = _inner.GetV2(id);
+                _logger.LogTrace("Cache miss for {CacheKey}", key);
+                if (items != null)
+                {
+                    _logger.LogTrace("Configurando itens em cache para {CacheKey}", key);
+                    _memoryCache.Set(key, items, TimeSpan.FromMinutes(1));
+                }
+            }
+            else
+            {
+                items.FromMemory();
+                _logger.LogTrace("Acerto para cache {CacheKey}", key);
+            }
+
+            return items;
         }
     }
 }

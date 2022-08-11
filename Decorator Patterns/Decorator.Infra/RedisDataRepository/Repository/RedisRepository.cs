@@ -35,7 +35,7 @@ namespace Decorator.Infra.RedisDataRepository.Repository
             _database.StringSet(key, value, new TimeSpan(timeOutHours, 0, 0));
         }
 
-        public CarDto GetType(object type)
+        public CarDtoV1 GetType(object type)
         {
             throw new NotImplementedException();
         }

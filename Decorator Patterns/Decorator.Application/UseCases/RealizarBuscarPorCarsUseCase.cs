@@ -1,10 +1,9 @@
 ﻿using Decorator.Application.Interfaces;
-using Decorator.Models;
+using Decorator.Application.Models.V2;
 using Decorator.Stores;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Threading.Tasks;
 
 namespace Decorator.Application.UseCases
 {
@@ -23,9 +22,35 @@ namespace Decorator.Application.UseCases
             _logger = logger;
         }
 
-        public CarDto RealizarBuscarPorCars()
+        public CarDtoV2 ListV2()
         {
-            return _inner.List();
+            try
+            {
+                // Se caso não tiver na memoria vai no banco
+                var key = "Cars";
+                var items = _memoryCache.Get<CarDtoV2>(key);
+                if (items == null)
+                {
+                    items = _inner.ListV2();
+                    _logger.LogTrace("Cache miss for {CacheKey}", key);
+                    if (items != null)
+                    {
+                        _logger.LogTrace("Setting items in cache for {CacheKey}", key);
+                        _memoryCache.Set(key, items, TimeSpan.FromMinutes(1));
+                    }
+                }
+                else
+                {
+                    items.FromMemory();
+                    _logger.LogTrace("Cache hit for {CacheKey}", key);
+                }
+
+                return items;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error");
+            }
         }
     }
 }

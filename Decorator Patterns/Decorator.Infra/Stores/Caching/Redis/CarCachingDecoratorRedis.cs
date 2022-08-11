@@ -22,17 +22,17 @@ namespace Decorator.Infra.Stores.Caching.Redis
             __redisRepository = redisRepository;
         }
 
-        public CarDto Get(object type)
+        public CarDtoV1 Get(object type)
         {
             return __redisRepository.GetType(type);
         }
 
-        public CarDto Get(int id)
+        public CarDtoV1 Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public CarDto List()
+        public CarDtoV1 List()
         {
             throw new System.NotImplementedException();
         }

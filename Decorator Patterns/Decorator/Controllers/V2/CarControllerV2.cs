@@ -1,32 +1,28 @@
 ﻿using Decorator.Application.Attributes;
 using Decorator.Application.Interfaces;
 using Decorator.Controllers.Base;
-using Decorator.Models;
-using Decorator.Stores;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
+using System;
 
 namespace Decorator.Controllers
 {
-    [Route("cars/v1/simulacoes")]
-    public class CarController : ApiController
+    [ApiVersion("2.0")]
+    [Route("cars/v{version:apiVersion}/simulacoes")]
+    public class CarControllerV2 : ApiController
     {
-        private readonly ILogger<CarController> __logger;
-        //private readonly IRealizarBuscarPorCarsUseCase _realizarBuscarPorCarsUseCase;
-        //private readonly IRealizarBuscaPorCarsPorIdUseCase _realizarBuscaPorCarsPorIdUseCase;
-        private readonly ICarStore _store;
+        private readonly ILogger<CarControllerV2> __logger;
+        private readonly IRealizarBuscaPorCarsPorIdUseCase _realizarBuscaPorCarsPorIdUseCase;
+        private readonly IRealizarBuscarPorCarsUseCase _realizarBuscarPorCarsUseCase;
 
-        public CarController(ICarStore store,
-                             //IRealizarBuscarPorCarsUseCase realizarBuscarPorCars,
-                             //IRealizarBuscaPorCarsPorIdUseCase realizarBuscaPorCarsPorIdUseCase, 
-                             ILogger<CarController> logger)
+        public CarControllerV2(ILogger<CarControllerV2> logger, 
+                               IRealizarBuscaPorCarsPorIdUseCase realizarBuscaPorCarsPorIdUseCase, 
+                               IRealizarBuscarPorCarsUseCase realizarBuscarPorCarsUseCase)
         {
-            _store = store;
-            //_realizarBuscarPorCarsUseCase = realizarBuscarPorCars;
-            //_realizarBuscaPorCarsPorIdUseCase = realizarBuscaPorCarsPorIdUseCase;
             __logger = logger;
+            _realizarBuscaPorCarsPorIdUseCase = realizarBuscaPorCarsPorIdUseCase;
+            _realizarBuscarPorCarsUseCase = realizarBuscarPorCarsUseCase;
         }
 
         /// <summary>
@@ -40,7 +36,7 @@ namespace Decorator.Controllers
         {
             try
             {
-                return ResponseOk(_store.List());
+                return ResponseOk(_realizarBuscarPorCarsUseCase.ListV2());
             }
             catch (System.Exception)
             {
@@ -63,14 +59,14 @@ namespace Decorator.Controllers
         {
             try
             {
-                var car = _store.Get(id);
+                var car = _realizarBuscaPorCarsPorIdUseCase.GetV2(id);
 
-                if(car is null)
+                if (car is null)
                 {
                     return ResponseNotFound();
                 }
 
-                return ResponseOk(_store.Get(id));
+                return ResponseOk(_realizarBuscaPorCarsPorIdUseCase.GetV2(id));
             }
             catch (System.Exception)
             {

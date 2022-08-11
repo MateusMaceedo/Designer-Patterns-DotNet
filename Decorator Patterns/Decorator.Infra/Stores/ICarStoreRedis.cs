@@ -4,7 +4,7 @@ namespace Decorator.Infra.Stores
 {
     public interface ICarStoreRedis
     {
-        CarDto List();
-        CarDto Get(int id);
+        CarDtoV1 List();
+        CarDtoV1 Get(int id);
     }
 }

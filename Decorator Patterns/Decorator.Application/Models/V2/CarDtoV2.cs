@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Decorator.Models
+namespace Decorator.Application.Models.V2
 {
-    public class CarDto
+    public class CarDtoV2
     {
-        public List<Car> Cars { get; set; }
+        public List<CarV2> Cars { get; set; }
         public string From { get; set; }
 
-        public CarDto(string from, params Car[] cars)
+        public CarDtoV2(string from, params CarV2[] cars)
         {
             Cars = cars.ToList();
             From = from;
