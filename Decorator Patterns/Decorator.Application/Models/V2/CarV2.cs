@@ -4,9 +4,9 @@ namespace Decorator.Application.Models.V2
 {
     public class CarV2
     {
-        public int Id { get; set; }
-        public string Model { get; set; }
-        public string Brand { get; set; }
-        public int Year { get; set; }
+        public int IdSimulacao { get; set; }
+        public string ModelVeiculo { get; set; }
+        public string BrandVeiculo { get; set; }
+        public int YearVeiculo { get; set; }
     }
 }

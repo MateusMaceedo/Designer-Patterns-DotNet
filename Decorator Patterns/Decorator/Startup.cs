@@ -3,6 +3,7 @@ using Decorator.Application.UseCases;
 using Decorator.Domain.Extensions;
 using Decorator.Infra.Extensions;
 using Decorator.Infra.Stores.Caching.Redis;
+using Decorator.Infra.Stores.V2;
 using Decorator.Stores;
 using Decorator.Stores.Caching;
 using Microsoft.AspNetCore.Builder;
@@ -28,8 +29,6 @@ namespace Decorator
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRealizarBuscaPorCarsPorIdUseCase, RealizarBuscaPorCarsPorIdUseCase>();
-            services.AddScoped<IRealizarBuscarPorCarsUseCase, RealizarBuscarPorCarsUseCase>();
             services.AddControllers();
             services.AddMemoryCache();
             //services.AddSwagger();
@@ -77,6 +76,9 @@ namespace Decorator
                 // add a custom operation filter which sets default values
                 options.OperationFilter<SwaggerDefaultValues>();
             });
+
+            services.AddScoped<IRealizarBuscaPorCarsPorIdUseCase, RealizarBuscaPorCarsPorIdUseCase>();
+            services.AddScoped<IRealizarBuscarPorCarsUseCase, RealizarBuscarPorCarsUseCase>();
         }
 
         private void RedisConnector(IServiceCollection services)
@@ -86,12 +88,13 @@ namespace Decorator
 
         private void EnableDecorator(IServiceCollection services)
         {
-            services.Decorate<ICarStore, CarCachingStore>();
+            services.Decorate<ICarStoreV1, CarCachingStore>();
         }
 
         private static void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<ICarStore, CarStore>();
+            services.AddScoped<ICarStoreV1, CarStoreV1>();
+            services.AddScoped<ICarStoreV2, CarStoreV2>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)

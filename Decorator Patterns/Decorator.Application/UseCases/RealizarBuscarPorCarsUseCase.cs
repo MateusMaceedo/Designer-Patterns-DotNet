@@ -1,6 +1,5 @@
 ﻿using Decorator.Application.Interfaces;
 using Decorator.Application.Models.V2;
-using Decorator.Stores;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,15 +9,15 @@ namespace Decorator.Application.UseCases
     public class RealizarBuscarPorCarsUseCase : IRealizarBuscarPorCarsUseCase
     {
         private readonly IMemoryCache _memoryCache;
-        private readonly ICarStore _inner;
+        private readonly ICarStoreV2 _inner2;
         private readonly ILogger<RealizarBuscarPorCarsUseCase> _logger;
 
         public RealizarBuscarPorCarsUseCase(IMemoryCache memoryCache,
-                                            ICarStore inner,
+                                            ICarStoreV2 inner,
                                             ILogger<RealizarBuscarPorCarsUseCase> logger)
         {
             _memoryCache = memoryCache;
-            _inner = inner;
+            _inner2 = inner;
             _logger = logger;
         }
 
@@ -31,7 +30,7 @@ namespace Decorator.Application.UseCases
                 var items = _memoryCache.Get<CarDtoV2>(key);
                 if (items == null)
                 {
-                    items = _inner.ListV2();
+                    items = _inner2.ListV2();
                     _logger.LogTrace("Cache miss for {CacheKey}", key);
                     if (items != null)
                     {

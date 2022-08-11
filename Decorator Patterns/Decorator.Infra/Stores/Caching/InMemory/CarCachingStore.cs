@@ -1,4 +1,5 @@
 ﻿using System;
+using Decorator.Application.Interfaces;
 using Decorator.Application.Models.V2;
 using Decorator.Models;
 using Microsoft.Extensions.Caching.Memory;
@@ -6,19 +7,22 @@ using Microsoft.Extensions.Logging;
 
 namespace Decorator.Stores.Caching
 {
-    public class CarCachingStore : ICarStore
+    public class CarCachingStore : ICarStoreV1
     {
         private readonly IMemoryCache _memoryCache;
-        private readonly ICarStore _inner;
+        private readonly ICarStoreV1 _inner1;
+        private readonly ICarStoreV2 _inner2;
         private readonly ILogger<CarCachingStore> _logger;
 
-        public CarCachingStore(IMemoryCache memoryCache, 
-                               ICarStore inner, 
-                               ILogger<CarCachingStore> logger)
+        public CarCachingStore(IMemoryCache memoryCache,
+                               ICarStoreV1 inner,
+                               ILogger<CarCachingStore> logger, 
+                               ICarStoreV2 inner2)
         {
             _memoryCache = memoryCache;
-            _inner = inner;
+            _inner1 = inner;
             _logger = logger;
+            _inner2 = inner2;
         }
 
         public CarDtoV1 ListV1()
@@ -27,7 +31,7 @@ namespace Decorator.Stores.Caching
             var items = _memoryCache.Get<CarDtoV1>(key);
             if (items == null)
             {
-                items = _inner.ListV1();
+                items = _inner1.ListV1();
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {
@@ -50,7 +54,7 @@ namespace Decorator.Stores.Caching
             var items = _memoryCache.Get<CarDtoV1>(key);
             if (items == null)
             {
-                items = _inner.GetV1(id);
+                items = _inner1.GetV1(id);
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {
@@ -73,7 +77,7 @@ namespace Decorator.Stores.Caching
             var items = _memoryCache.Get<CarDtoV2>(key);
             if (items == null)
             {
-                items = _inner.ListV2();
+                items = _inner2.ListV2();
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {
@@ -96,7 +100,7 @@ namespace Decorator.Stores.Caching
             var items = _memoryCache.Get<CarDtoV2>(key);
             if (items == null)
             {
-                items = _inner.GetV2(id);
+                items = _inner2.GetV2(id);
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {

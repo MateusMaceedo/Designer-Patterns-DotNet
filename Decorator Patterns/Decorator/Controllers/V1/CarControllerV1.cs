@@ -12,14 +12,14 @@ namespace Decorator.Controllers
     [Route("cars/v{version:apiVersion}/simulacoes")]
     public class CarControllerV1 : ApiController
     {
-        private readonly ILogger<CarControllerV1> __logger;
-        private readonly ICarStore _store;
+        private readonly ILogger<CarControllerV1> _logger;
+        private readonly ICarStoreV1 _store1;
 
-        public CarControllerV1(ICarStore store,
+        public CarControllerV1(ICarStoreV1 store,
                              ILogger<CarControllerV1> logger)
         {
-            _store = store;
-            __logger = logger;
+            _store1 = store;
+            _logger = logger;
         }
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace Decorator.Controllers
         {
             try
             {
-                return ResponseOk(_store.ListV1());
+                return ResponseOk(_store1.ListV1());
             }
             catch (System.Exception)
             {
-                __logger.LogError("Error ao realizar Consulta de Cars");
+                _logger.LogError("Error ao realizar Consulta de Cars");
                 throw new System.Exception("Error ao realizar Consulta de Cars");
             }
         }
@@ -56,18 +56,18 @@ namespace Decorator.Controllers
         {
             try
             {
-                var car = _store.GetV1(id);
+                var car = _store1.GetV1(id);
 
                 if(car is null)
                 {
                     return ResponseNotFound();
                 }
 
-                return ResponseOk(_store.GetV1(id));
+                return ResponseOk(_store1.GetV1(id));
             }
             catch (System.Exception)
             {
-                __logger.LogError($"Error ao realizar Consulta de Cars, por id '{id}'");
+                _logger.LogError($"Error ao realizar Consulta de Cars, por id '{id}'");
                 throw new System.Exception("Error ao realizar Consulta de Cars");
             }
         }

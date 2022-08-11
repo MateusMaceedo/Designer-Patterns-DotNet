@@ -8,19 +8,28 @@ using System;
 namespace Decorator.Application.UseCases
 {
     public class RealizarBuscaPorCarsPorIdUseCase : IRealizarBuscaPorCarsPorIdUseCase 
-
     {
         private readonly IMemoryCache _memoryCache;
-        private readonly ICarStore _inner;
+        private readonly ICarStoreV2 _inner2;
         private readonly ILogger<RealizarBuscaPorCarsPorIdUseCase> _logger;
+
+        public RealizarBuscaPorCarsPorIdUseCase(IMemoryCache memoryCache, 
+                                                ICarStoreV2 inner2, 
+                                                ILogger<RealizarBuscaPorCarsPorIdUseCase> logger)
+        {
+            _memoryCache = memoryCache;
+            _inner2 = inner2;
+            _logger = logger;
+        }
 
         public CarDtoV2 GetV2(int id)
         {
+            _logger.LogError($"Consulta '{id}'");
             var key = $"Cars:{id}";
             var items = _memoryCache.Get<CarDtoV2>(key);
             if (items == null)
             {
-                items = _inner.GetV2(id);
+                items = _inner2.GetV2(id);
                 _logger.LogTrace("Cache miss for {CacheKey}", key);
                 if (items != null)
                 {
