@@ -1,4 +1,5 @@
-# Designer-Patterns-DotNet
-Padrões de projeto, usando Patterns usando .Net Core.
+# DesignPatternsGoF
+Design Patterns GoF
 
-[Documentação](https://refactoring.guru/pt-br/design-patterns/csharp)
+## Branch master build status
+[![Build status](https://ci.appveyor.com/api/projects/status/lk08j54bnv6qq5p6/branch/master?svg=true)](https://ci.appveyor.com/project/alexandrebl/designpatternsgof/branch/master)
