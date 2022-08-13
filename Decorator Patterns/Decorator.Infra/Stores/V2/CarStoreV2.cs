@@ -36,6 +36,5 @@ namespace Decorator.Infra.Stores.V2
         public CarDtoV2 GetV2(int userid)
         {
             return new CarDtoV2("Database", CarStorageV2.FirstOrDefault(f => f.IdSimulacao == userid));
-        }
-    }
+        }    }
 }
