@@ -1,0 +1,11 @@
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\bin\Debug\net5.0\FactoryMethodDesignPattern.deps.json
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\bin\Debug\net5.0\FactoryMethodDesignPattern.dll
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\bin\Debug\net5.0\ref\FactoryMethodDesignPattern.dll
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\bin\Debug\net5.0\FactoryMethodDesignPattern.pdb
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\FactoryMethodDesignPattern.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\FactoryMethodDesignPattern.AssemblyInfoInputs.cache
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\FactoryMethodDesignPattern.AssemblyInfo.cs
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\FactoryMethodDesignPattern.csproj.CoreCompileInputs.cache
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\FactoryMethodDesignPattern.dll
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\ref\FactoryMethodDesignPattern.dll
+C:\Users\mateu\@Projetos\Designer-Patterns-DotNet\Factory Method Patterns\FactoryMethodDesignPattern\FactoryMethodDesignPattern\obj\Debug\net5.0\FactoryMethodDesignPattern.pdb

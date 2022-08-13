@@ -123,15 +123,10 @@ namespace Decorator
             });
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseSwaggerUI();
-
             app.UseSwagger();
-           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
