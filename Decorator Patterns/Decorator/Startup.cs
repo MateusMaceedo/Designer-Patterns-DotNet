@@ -1,9 +1,12 @@
+using Amazon.DynamoDBv2;
 using Decorator.Application.Interfaces;
 using Decorator.Application.UseCases;
 using Decorator.Domain.Extensions;
+using Decorator.Domain.Interfaces.Context;
 using Decorator.Infra.Extensions;
 using Decorator.Infra.Stores.Caching.Redis;
 using Decorator.Infra.Stores.V2;
+using Decorator.Repository.Context;
 using Decorator.Stores;
 using Decorator.Stores.Caching;
 using Microsoft.AspNetCore.Builder;
@@ -79,6 +82,9 @@ namespace Decorator
 
             services.AddScoped<IRealizarBuscaPorCarsPorIdUseCase, RealizarBuscaPorCarsPorIdUseCase>();
             services.AddScoped<IRealizarBuscarPorCarsUseCase, RealizarBuscarPorCarsUseCase>();
+
+            //var client = Configuration.GetAWSOptions().CreateServiceClient<IAmazonDynamoDB>();
+            //services.AddScoped<IDynamoDbContext<AwesomeClass>>(provider => new DynamoDbContext<AwesomeClass>(client));
         }
 
         private void RedisConnector(IServiceCollection services)

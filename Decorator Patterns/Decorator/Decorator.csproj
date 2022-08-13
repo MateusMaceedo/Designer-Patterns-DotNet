@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.12.21" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.3.68" />
     <PackageReference Include="Bogus" Version="33.0.2" />
     <PackageReference Include="Bogus.Tools.Analyzer" Version="33.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -30,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Decorator.Infra\Decorator.Infra.csproj" />
+    <ProjectReference Include="..\Decorator.Repository\Decorator.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Base\" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.3.68" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Decorator.Domain\Decorator.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,9 +6,4 @@
 	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>

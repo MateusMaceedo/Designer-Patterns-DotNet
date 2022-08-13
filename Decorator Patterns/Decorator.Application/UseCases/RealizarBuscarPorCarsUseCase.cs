@@ -1,8 +1,12 @@
-﻿using Decorator.Application.Interfaces;
-using Decorator.Application.Models.V2;
+﻿using AutoMapper;
+using Decorator.Application.Interfaces;
+using Decorator.Application.Request;
+using Decorator.Application.Response;
+using Decorator.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace Decorator.Application.UseCases
 {
@@ -11,45 +15,24 @@ namespace Decorator.Application.UseCases
         private readonly IMemoryCache _memoryCache;
         private readonly ICarStoreV2 _inner2;
         private readonly ILogger<RealizarBuscarPorCarsUseCase> _logger;
-
+        private readonly IRealizarBuscarPorCarsRepository _realizarBuscarPorCarsRepository;
+        private readonly IMapper _mapper;
         public RealizarBuscarPorCarsUseCase(IMemoryCache memoryCache,
                                             ICarStoreV2 inner,
-                                            ILogger<RealizarBuscarPorCarsUseCase> logger)
+                                            ILogger<RealizarBuscarPorCarsUseCase> logger,
+                                            IRealizarBuscarPorCarsRepository realizarBuscarPorCarsRepository, 
+                                            IMapper mapper)
         {
             _memoryCache = memoryCache;
             _inner2 = inner;
             _logger = logger;
+            _realizarBuscarPorCarsRepository = realizarBuscarPorCarsRepository;
+            _mapper = mapper;
         }
 
-        public CarDtoV2 ListV2()
+        public Task<SimulacaoCarResponse> ConsultaVeiculo(SimulacaoCarRequest request)
         {
-            try
-            {
-                // Se caso não tiver na memoria vai no banco
-                var key = "Cars";
-                var items = _memoryCache.Get<CarDtoV2>(key);
-                if (items == null)
-                {
-                    items = _inner2.ListV2();
-                    _logger.LogTrace("Cache miss for {CacheKey}", key);
-                    if (items != null)
-                    {
-                        _logger.LogTrace("Setting items in cache for {CacheKey}", key);
-                        _memoryCache.Set(key, items, TimeSpan.FromMinutes(1));
-                    }
-                }
-                else
-                {
-                    items.FromMemory();
-                    _logger.LogTrace("Cache hit for {CacheKey}", key);
-                }
-
-                return items;
-            }
-            catch (Exception)
-            {
-                throw new Exception("Error");
-            }
+            throw new NotImplementedException();
         }
     }
 }
