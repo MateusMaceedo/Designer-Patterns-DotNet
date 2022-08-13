@@ -13,19 +13,19 @@ namespace Decorator.Controllers
     public class CarControllerV2 : ApiController
     {
         private readonly ILogger<CarControllerV2> _logger;
-        //private readonly IRealizarBuscaPorCarsPorIdUseCase _realizarBuscaPorCarsPorIdUseCase;
-        //private readonly IRealizarBuscarPorCarsUseCase _realizarBuscarPorCarsUseCase;
+        private readonly IRealizarBuscaPorCarsPorIdUseCase _realizarBuscaPorCarsPorIdUseCase;
+        private readonly IRealizarBuscarPorCarsUseCase _realizarBuscarPorCarsUseCase;
         private readonly ICarStoreV2 _store;
 
         public CarControllerV2(ILogger<CarControllerV2> logger,
-                               ICarStoreV2 store)                               
-                               //IRealizarBuscaPorCarsPorIdUseCase realizarBuscaPorCarsPorIdUseCase, 
-                               //IRealizarBuscarPorCarsUseCase realizarBuscarPorCarsUseCase)
+                               ICarStoreV2 store,                         
+                               IRealizarBuscaPorCarsPorIdUseCase realizarBuscaPorCarsPorIdUseCase, 
+                               IRealizarBuscarPorCarsUseCase realizarBuscarPorCarsUseCase)
         {
             _logger = logger;
             _store = store;
-            //_realizarBuscaPorCarsPorIdUseCase = realizarBuscaPorCarsPorIdUseCase;
-            //_realizarBuscarPorCarsUseCase = realizarBuscarPorCarsUseCase;
+            _realizarBuscaPorCarsPorIdUseCase = realizarBuscaPorCarsPorIdUseCase;
+            _realizarBuscarPorCarsUseCase = realizarBuscarPorCarsUseCase;
         }
 
         /// <summary>
